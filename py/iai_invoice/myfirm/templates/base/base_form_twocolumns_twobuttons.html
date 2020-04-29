@@ -1,0 +1,17 @@
+{# 'base/base_form_twocolumns_twobuttons.html' #}
+
+{% extends "base/base_form_twocolumns_mid.html" %}
+
+{% comment %}
+    forma z jedną kolumną i przyciskami zapisz/anuluj
+{% endcomment %}
+
+{% load i18n static %}
+
+
+{% block base_form_main_lower_buttons %}
+
+    <button type="submit" name="action" value="OK" class="btn btn-primary btn">Zapisz</button>
+    <button type="submit" name="action" value="Cancel" class="btn btn-secondary btn">Wyjdź</button>
+
+{% endblock %}

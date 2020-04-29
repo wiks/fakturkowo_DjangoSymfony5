@@ -1,0 +1,52 @@
+{# 'invoices/invoice_add_item.html' #}
+
+{% extends 'invoices/invoice_edit_common.html' %}
+
+{% comment %}
+    edycja faktury, wybieranie przedmiotu do dodania
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_left_part_for_item_select %}
+
+    {% if invoices_items_richer %}
+
+        <table class="table">
+
+            {% for invoice_item in invoices_items_richer %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td style="width:30%" colspan="3"><h4><span class="badge badge-dark">{{ invoice_item.name }}</span></h4></td>
+                    <td>
+                        <a href="{% url 'invoice_del_item' invoice.id invoice_item.id invoice_item.iid %}">
+                            <ion-icon ios="ios-trash" md="md-trash" style="font-size: 32px;"></ion-icon>
+                        </a>
+                    </td>
+                    <td style="text-align:right;">{{ invoice_item.items_number }} {{ invoice_item.jm }}</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>{{ invoice_item.price_netto }}</td>
+                    <td>{{ invoice_item.price_brutto }}</td>
+                    <td>{{ invoice_item.value_netto }}</td>
+                    <td>{{ invoice_item.vat }}</td>
+                    <td>{{ invoice_item.value_brutto }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+
+        <br>
+
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            faktura nie zawiera żadnych pozycji
+        </div>
+    {% endif %}
+
+    <button type="submit" name="action" value="add_item" class="btn btn-success btn">Dodaj pozycję do faktury</button>
+    <br><br><br>
+
+{% endblock %}

@@ -1,0 +1,172 @@
+{# 'customers/firm_edit.html' #}
+
+{% extends "base/base_form_twocolumns_twobuttons.html" %}
+
+{% comment %}
+    edycja danych własnych
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_form_main_upper_div %}
+
+    {% block base_form_main_head_div %}{% endblock %}
+
+    <div class="form-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">nazwa firmy</span>
+            <input type="text" class="form-control firmName" id="firmName" name="firmName" value="{{ firmName }}"
+                   aria-describedby="firmNameHelp" placeholder="nazwa">
+        </div>
+        <small id="sfirmName" class="form-text text-muted">nazwa firmy -wymagana</small>
+    </div>
+
+    <!-- ew. dropzone do wrzucenia ikonki -->
+
+{% endblock %}
+
+{% block base_form_main_left_div %}
+
+    <div class="form-group">
+        <label for="firmAdres1">adres</label>
+        <input type="text" class="form-control firmAdres" id="firmAdres1" name="firmAdres1" value="{{ firmAdres1 }}"
+               aria-describedby="firmAdres1Help" placeholder="adres -wymagana choć jedna linia">
+        <input type="text" class="form-control firmAdres" id="firmAdres2" name="firmAdres2" value="{{ firmAdres2 }}"
+               aria-describedby="firmAdres1Help">
+        <input type="text" class="form-control firmAdres" id="firmAdres3" name="firmAdres3" value="{{ firmAdres3 }}"
+               aria-describedby="firmAdres1Help">
+        <input type="text" class="form-control firmAdres" id="firmAdres4" name="firmAdres4" value="{{ firmAdres4 }}"
+               aria-describedby="firmAdres1Help">
+        <input type="text" class="form-control firmAdres" id="firmAdres5" name="firmAdres5" value="{{ firmAdres5 }}"
+               aria-describedby="firmAdres1Help">
+
+        <small id="sfirmAdres1" class="form-text text-muted">adres firmy -wymagany, w zależności od potrzeb ile linii. Obowiązkowa tylko pierwsza</small>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">adres email</span>
+            <input type="email" class="form-control mInputEmail" id="mInputEmail" name="mInputEmail" value="{{ mInputEmail }}"
+                   aria-describedby="emailHelp" placeholder="email -opcjonalnie">
+        </div>
+        <small id="semail" class="form-text text-muted">jeśli tylko chcesz</small>
+    </div>
+
+    <!-- ew. dropzone do wrzucenia ikonki -->
+
+{% endblock %}
+
+{% block base_form_main_right_div %}
+
+    <div class="form-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">NIP</span>
+            <input type="text" class="form-control firmNip" id="firmNip" name="firmNip" value="{{ firmNip }}"
+                   aria-describedby="firmNipHelp" placeholder="NIP">
+        </div>
+        <small id="sfirmNip" class="form-text text-muted">NIP firmy -opcjonalnie</small>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">REGON</span>
+            <input type="text" class="form-control firmRegon" id="firmRegon" name="firmRegon" value="{{ firmRegon }}"
+                   aria-describedby="firmNipHelp" placeholder="REGON">
+        </div>
+        <small id="sfirmRegon" class="form-text text-muted">REGON firmy -opcjonalnie</small>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">PESEL</span>
+            <input type="text" class="form-control firmPesel" id="firmPesel" name="firmPesel" value="{{ firmPesel }}"
+                   aria-describedby="firmNipHelp" placeholder="PESEL">
+        </div>
+        <small id="sfirmPesel" class="form-text text-muted">PESEL firmy -opcjonalnie (jeśli wystawcą jest np. osoba fizyczna)</small>
+    </div>
+
+
+    <div class="form-group">
+        <label for="firmAccount1">bank, numer konta</label>
+        <input type="text" class="form-control firmAccount" id="firmAccount1" name="firmAccount1" value="{{ firmAccount1 }}"
+               aria-describedby="firmAccount1Help" placeholder="numer konta -obowiązkowy">
+
+        <input type="text" class="form-control firmAccount" id="firmAccount2" name="firmAccount2" value="{{ firmAccount2 }}"
+               aria-describedby="firmAccount2Help" placeholder="nazwa banku -opcjonalnie">
+
+        <small id="sfirmAccount" class="form-text text-muted">Obowiązkowy tylko numer konta, nazwa opcjonalna</small>
+    </div>
+
+{% endblock %}
+
+
+{% block base_nav_footer_scripts %}
+
+    <script>
+
+        /** odszukaj element input, wyciągnij z nich funkcyjne klasy nez duplikacji
+         *  dla każdej z nich sprawdź, czy jest na liście błędów,
+         *  jeśli tak -dodaj klasę error, jeśli nie usuń klasę error
+         */
+        function do_with_error_class() {
+
+            var input_list = document.getElementsByTagName('input');
+
+            // pobieram wszystkie klasy:
+            var form_input_class_list = [];
+            for(var i=0;i<input_list.length;i++) {
+                //input_list[i].classList.contains("active");
+                for(var j=0;j<input_list[i].classList.length;j++) {
+                    var one_class = input_list[i].classList[j];
+                    if((one_class != 'form-control') && (form_input_class_list.indexOf(one_class) < 0)) {
+                        form_input_class_list.push(one_class);
+                    }
+                }
+            }
+
+            //alert('znalezione klasy: ' + form_input_class_list );
+            // firmName,firmAdres,mInputEmail,firmNip,firmRegon,firmPesel,firmAccount
+
+            // to do wyświetlenia tylko
+            var errors_message_list = [];
+            {% for i in errors_message_list %}
+                errors_message_list.push('{{ i }}');
+            {% endfor %}
+
+            var errors_message_redclass_list = [];
+            {% for i in errors_message_redclass_list %}
+                errors_message_redclass_list.push('{{ i }}');
+            {% endfor %}
+
+            // dla każdej z klas pobieram elementy i dodaję lub usuwam klasę error_input
+            for(var k=0;k<form_input_class_list.length;k++) {
+                // klasa, którą sprawdzam teraz:
+                var one_class = form_input_class_list[k];
+                // pobieram wszystkie elementy z tą klasą:
+                var one_class_elements_list = document.getElementsByClassName(one_class);
+                //console.log('elementy z klasą: "' + one_class + '" --> szt: ' + one_class_elements_list.length)
+                // dla każdego z nich:
+                for(var l=0;l<one_class_elements_list.length;l++) {
+                    // jeśli ta klasa jest w błędnych -> zaznaczam error
+                    if(  errors_message_redclass_list.indexOf(one_class) >= 0 ) {
+                        //console.log('powinien być error')
+                        if(!one_class_elements_list[l].classList.contains("error")) {
+                            //console.log('nie zawiera, więc dodaję error')
+                            one_class_elements_list[l].classList.add("error");
+                        }
+                    }else{
+                        //console.log('NIE powinno być erroru')
+                        if(one_class_elements_list[l].classList.contains("error")) {
+                            //console.log('zawiera, więc usuwam error')
+                            one_class_elements_list[l].classList.remove("error");
+                        }
+                    }
+                }
+            }
+        }
+
+        do_with_error_class();
+
+    </script>
+
+{% endblock %}

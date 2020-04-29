@@ -1,0 +1,36 @@
+{# 'invoices/invoice_edit_common_pure.html' #}
+
+{% extends "base/base_form_onecolumn_mid.html" %}
+
+{% comment %}
+    edycja danych faktury, część wspólna
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_form_main_upper_div %}{% endblock %}
+
+{% block base_form_main_center_div %}
+
+    Sprzedawca:<br>
+    <h2><span class="badge badge-dark">{{ seller.fname }}</span></h2>
+    <br>
+
+    Nabywca:<br>
+    <h2><span class="badge badge-dark">{{ customer.fname }}</span></h2>
+    <br><br>
+
+    {% block base_left_part_for_item_select %}{% endblock %}
+
+{% endblock %}
+
+
+{% block base_form_main_lower_buttons %}
+
+    <button type="submit" name="action" value="OK" class="btn btn-primary btn">Zapisz</button>
+    <button type="submit" name="action" value="delete" class="btn btn-warning btn">Usuń</button>
+    <button type="submit" name="action" value="Cancel" class="btn btn-secondary btn">Wyjdź</button>
+
+{% endblock %}
+
+

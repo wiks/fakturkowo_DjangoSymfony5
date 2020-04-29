@@ -1,0 +1,49 @@
+{# 'customers/customers_main.html' #}
+
+{% extends "base/base_nonav.html" %}
+
+{% comment %}
+    lista klientów
+{% endcomment %}
+
+{% load i18n static %}
+
+{% load proper_paginate %}
+
+{% block base_nav_main_div %}
+
+    <div class="alert alert-info" role="alert">
+        Klienci
+    </div>
+
+    {% if customers_objs %}
+
+        {% for customer_obj in corected_pagination %}
+
+            <h1>
+                <a href="{% url 'customer_show' customer_obj.id %}">
+                    <span class="badge badge-dark">{{ customer_obj.fname }}</span>
+                </a>
+            </h1>
+            <br>
+
+        {% endfor %}
+
+        {#<!-- sprawdzam czy jest paginator -->#}
+        {% if paginator %}
+            {% with corected_pagination as page_obj %}
+                {% include "base/pagination_buttons.html" %}
+            {% endwith %}
+        {% endif %}
+
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            lista jest pusta, dodaj pierwszego klienta
+        </div>
+    {% endif %}
+    <a class="btn btn-primary" href="{% url 'customer_add' %}" role="button">dodaj klienta</a>
+    <br><br>
+
+    <button type="submit" name="action" value="Cancel" class="btn btn-secondary btn">Wyjdź</button>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{# 'invoices/invoice_show_vat_sum_table.html' #}
+
+
+{% comment %}
+    tabela na fakturze sumaryczna dla VAT
+{% endcomment %}
+
+
+Sprzedaż według cen brutto
+
+<table class="table_w100" style="border-style:solid;border-width:2px;">
+    <tr>
+        <td style="width:25%;" class="td_border_center">PLN</td>
+        <td style="width:25%;" class="td_border_center">Wartość netto</td>
+        <td style="width:25%;" class="td_border_center">Wartość VAT</td>
+        <td style="width:25%;" class="td_border_center">Wartość brutto</td>
+    </tr>
+    {% for vat_row in vat_sum.list %}
+        <tr>
+            {% if vat_row.wn %}
+                <td class="td_border_center">stawka {{ vat_row.sv }}%</td>
+                <td class="td_border td_right">{{ vat_row.wn|floatformat:-2 }}</td>
+                <td class="td_border td_right">{{ vat_row.wv|floatformat:-2 }}</td>
+                <td class="td_border td_right">{{ vat_row.wb|floatformat:-2 }}</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    <tr>
+        <td class="td_border_center">Razem</td>
+        <td class="td_border td_right">{{ vat_sum.sum.wn|floatformat:-2 }}</td>
+        <td class="td_border td_right">{{ vat_sum.sum.wv|floatformat:-2 }}</td>
+        <td class="td_border td_right">{{ vat_sum.sum.wb|floatformat:-2 }}</td>
+    </tr>
+</table>

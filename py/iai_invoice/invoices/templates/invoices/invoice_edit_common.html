@@ -1,0 +1,159 @@
+{# 'invoices/invoice_edit_common.html' #}
+
+{% extends "base/base_form_twocolumns_mid.html" %}
+
+{% comment %}
+    edycja danych faktury, część wspólna
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_form_main_upper_div %}{% endblock %}
+
+{% block base_form_main_left_div %}
+
+    {# --------------------------------------------------------------------------------- #}
+    Sprzedawca:<br>
+    <h2><span class="badge badge-dark">{{ seller.fname }}</span></h2>
+    <br><br>
+    {# --------------------------------------------------------------------------------- #}
+
+
+    {# --------------------------------------------------------------------------------- #}
+    {% block base_left_part_for_item_select %}{% endblock %}
+    {# --------------------------------------------------------------------------------- #}
+
+{% endblock %}
+
+{% block base_form_main_right_div %}
+
+    {# --------------------------------------------------------------------------------- #}
+    Nabywca:<br>
+    <h2><span class="badge badge-dark">{{ customer.fname }}</span></h2>
+    <br><br>
+    {# --------------------------------------------------------------------------------- #}
+
+
+    {# --------------------------------------------------------------------------------- #}
+    <div class="form-group">
+        <label for="fNr">numer faktury</label>
+        <input type="text" class="form-control fNr" id="fNr" name="fNr" value="{{ fNr }}"
+               aria-describedby="fNrHelp" placeholder="numer faktury">
+        <small id="sfNr" class="form-text text-muted">numer faktury -wymagany</small>
+    </div>
+
+    <table style="width:100%;">
+        <tr>
+            <td style="width:50%;">
+    <div class="form-group">
+        <label>faktura z dnia</label>
+        <input type="date" name="dt_created" max="3000-12-31" value="{{ dt_created }}"
+            min="1000-01-01" class="form-control">
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+        <label>termin płatności</label>
+        <input type="date" name="dt_pait_to" max="3000-12-31" value="{{ dt_pait_to }}"
+            min="1000-01-01" class="form-control">
+    </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="form-group">
+        <label>data dostarczenia usługi</label>
+        <input type="date" name="dt_delivery" max="3000-12-31" value="{{ dt_delivery }}"
+            min="1000-01-01" class="form-control">
+    </div>
+
+
+    <div class="form-group">
+        <label for="person_auth_name">osoba upoważniona</label>
+        <input type="text" class="form-control person_auth_name" id="person_auth_name" name="person_auth_name" value="{{ person_auth_name }}"
+               aria-describedby="nameHelp" placeholder="">
+        <small id="sperson_auth_name" class="form-text text-muted">osoba upoważniona do wystawienia faktury</small>
+    </div>
+    {# --------------------------------------------------------------------------------- #}
+
+{% endblock %}
+
+
+{% block base_form_main_lower_buttons %}
+
+    <button type="submit" name="action" value="OK" class="btn btn-primary btn">Zapisz</button>
+    <button type="submit" name="action" value="delete" class="btn btn-warning btn">Usuń</button>
+    <button type="submit" name="action" value="Cancel" class="btn btn-secondary btn">Wyjdź</button>
+
+{% endblock %}
+
+{% block base_nav_footer_scripts %}
+
+    <script>
+
+        /** odszukaj element input, wyciągnij z nich funkcyjne klasy nez duplikacji
+         *  dla każdej z nich sprawdź, czy jest na liście błędów,
+         *  jeśli tak -dodaj klasę error, jeśli nie usuń klasę error
+         */
+        function do_with_error_class() {
+
+            var input_list = document.getElementsByTagName('input');
+
+            // pobieram wszystkie klasy:
+            var form_input_class_list = [];
+            for(var i=0;i<input_list.length;i++) {
+                //input_list[i].classList.contains("active");
+                for(var j=0;j<input_list[i].classList.length;j++) {
+                    var one_class = input_list[i].classList[j];
+                    if((one_class != 'form-control') && (form_input_class_list.indexOf(one_class) < 0)) {
+                        form_input_class_list.push(one_class);
+                    }
+                }
+            }
+
+            //alert('znalezione klasy: ' + form_input_class_list );
+            // firmName,firmAdres,mInputEmail,firmNip,firmRegon,firmPesel,firmAccount
+
+            // to do wyświetlenia tylko
+            var errors_message_list = [];
+            {% for i in errors_message_list %}
+                errors_message_list.push('{{ i }}');
+            {% endfor %}
+
+            var errors_message_redclass_list = [];
+            {% for i in errors_message_redclass_list %}
+                errors_message_redclass_list.push('{{ i }}');
+            {% endfor %}
+
+            // dla każdej z klas pobieram elementy i dodaję lub usuwam klasę error_input
+            for(var k=0;k<form_input_class_list.length;k++) {
+                // klasa, którą sprawdzam teraz:
+                var one_class = form_input_class_list[k];
+                // pobieram wszystkie elementy z tą klasą:
+                var one_class_elements_list = document.getElementsByClassName(one_class);
+                //console.log('elementy z klasą: "' + one_class + '" --> szt: ' + one_class_elements_list.length)
+                // dla każdego z nich:
+                for(var l=0;l<one_class_elements_list.length;l++) {
+                    // jeśli ta klasa jest w błędnych -> zaznaczam error
+                    if(  errors_message_redclass_list.indexOf(one_class) >= 0 ) {
+                        //console.log('powinien być error')
+                        if(!one_class_elements_list[l].classList.contains("error")) {
+                            //console.log('nie zawiera, więc dodaję error')
+                            one_class_elements_list[l].classList.add("error");
+                        }
+                    }else{
+                        //console.log('NIE powinno być erroru')
+                        if(one_class_elements_list[l].classList.contains("error")) {
+                            //console.log('zawiera, więc usuwam error')
+                            one_class_elements_list[l].classList.remove("error");
+                        }
+                    }
+                }
+            }
+        }
+
+        do_with_error_class();
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{# 'base/pagination_buttons.html' #}
+
+{% load proper_paginate %}
+
+{% load url_replace %}
+
+
+{% if page_obj.has_other_pages %}
+
+    <ul class="pagination">
+
+    {% if page_obj.number == 1 %}
+        <li class="disabled"><span class="btn btn-outline-info mb-4">&laquo;&laquo;</span></li>
+    {% else %}
+        <li><a class="btn btn-outline-info mb-4" href="?{% url_replace request 'page' 1 %}">&laquo;&laquo;</a></li>
+    {% endif %}
+
+    {% if page_obj.has_previous %}
+        <li><a class="btn btn-outline-info mb-4" href="?{% url_replace request 'page' page_obj.previous_page_number %}">&laquo;</a></li>
+    {% else %}
+        <li class="disabled"><span class="btn btn-outline-info mb-4">&laquo;</span></li>
+    {% endif %}
+
+    {% for i in paginator|proper_paginate:page_obj.number %}
+        {% if page_obj.number == i %}
+            <li class="active"><span class="btn btn-outline-info mb-4 active">{{ i }}</span></li>
+        {% else %}
+            <li><a class="btn btn-outline-info mb-4" href="?{% url_replace request 'page' i %}">{{ i }}</a></li>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <li><a class="btn btn-outline-info mb-4" href="?{% url_replace request 'page' page_obj.next_page_number %}">&raquo;</a></li>
+    {% else %}
+        <li class="disabled"><span class="btn btn-outline-info mb-4">&raquo;</span></li>
+    {% endif %}
+
+    {% if page_obj.number == paginator.num_pages %}
+        <li class="disabled"><span class="btn btn-outline-info mb-4">&raquo;&raquo;({{ paginator.num_pages }})</span></li>
+    {% else %}
+        <li><a class="btn btn-outline-info mb-4" href="?{% url_replace request 'page' paginator.num_pages %}">&raquo;&raquo;({{ paginator.num_pages }})</a></li>
+    {% endif %}
+
+    </ul>
+
+{% endif %}

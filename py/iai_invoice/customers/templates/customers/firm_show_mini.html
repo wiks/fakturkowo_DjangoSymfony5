@@ -1,0 +1,50 @@
+{# 'customers/firm_show_mini.html' #}
+
+<table>
+    <tr>
+        <th>
+            {{ shortfirm.firmName }}
+        </th>
+    </tr>
+
+    {% for address_line in shortfirm.address_list %}
+        <tr>
+            <td>
+                {{ address_line }}
+            </td>
+        </tr>
+    {% endfor %}
+
+    <tr>
+        <td>
+            NIP: {{ shortfirm.firmNip }}
+        </td>
+        <td>
+            REGON: {{ shortfirm.firmRegon }}
+        </td>
+    </tr>
+
+    {% if firmPesel %}
+        <tr>
+            <td>
+                PESEL: {{ shortfirm.firmPesel }}
+            </td>
+        </tr>
+    {% endif %}
+
+    <tr>
+        <td>
+            Bank: {{ shortfirm.firm_account_list.1 }}<br>
+            {{ shortfirm.firm_account_list.0 }}
+        </td>
+    </tr>
+
+    {% if shortfirm.mInputEmail %}
+        <tr>
+            <td>
+                Adres email: {{ shortfirm.mInputEmail }}
+            </td>
+        </tr>
+    {% endif %}
+
+</table>

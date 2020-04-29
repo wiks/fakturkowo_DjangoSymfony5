@@ -1,0 +1,16 @@
+{# 'base/base_form_twocolumns_onebutton.html' #}
+
+{% extends "base/base_form_twocolumns_mid.html" %}
+
+{% comment %}
+    forma z dwoma kolumnami i przyciskiem OK
+{% endcomment %}
+
+{% load i18n static %}
+
+
+{% block base_form_main_lower_buttons %}
+
+    <button type="submit" name="action" value="Cancel" class="btn btn-secondary btn">OK</button>
+
+{% endblock %}

@@ -1,0 +1,4 @@
+https://peterdev.pl/2019/01/11/picking-a-php-tool-to-generate-pdfs/
+
+https://stackoverflow.com/questions/8163963/generate-pdf-from-html-php
+

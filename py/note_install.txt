@@ -1,0 +1,50 @@
+# -*- coding: utf8 -*-
+
+python -m pip install Django
+python -m django --version
+3.0.5
+
+django-admin startproject iai_invoice
+cd iai_invoice
+python manage.py runserver
+
+python manage.py startapp myfirm
+python manage.py startapp customers
+python manage.py startapp invoices
+
+DB: MySQL:
+iai_invoice
+N4iHuIjVM6lpqboy
+
+pip install mysql-connector-python-rf
+Successfully installed mysql-connector-python-rf-2.2.2
+
+pip install mysql-connector
+Successfully installed mysql-connector-2.2.9
+
+pip install mysqlclient
+Successfully installed mysqlclient-1.4.6
+
+python manage.py migrate
+python manage.py createsuperuser
+
+Username (leave blank to use 'wiks'): iai
+Email address: iai@iai.pl
+Password:aiaiaiai
+
+(venv) wiks@ubuntu:~/Dokumenty/projects/iai_task/py/iai_invoice$ cd ..
+(venv) wiks@ubuntu:~/Dokumenty/projects/iai_task/py$ cd docs
+(venv) wiks@ubuntu:~/Dokumenty/projects/iai_task/py/docs$ python -m pip install Sphinx
+Collecting Sphinx
+  Downloading Sphinx-3.0.2-py3-none-any.whl (2.8 MB)
+
+(venv) wiks@ubuntu:~/Dokumenty/projects/iai_task/py/docs$ sphinx-quickstart
+Witamy w narzędziu quickstart Sphinksa 3.0.2.
+Selected root path: .
+> Rozdziel katalogi source i build (y/n) [n]:
+> Nazwa projektu: IAI-invoice
+> Nazwisko autora: WikS.eu
+> Wydanie projektu []:
+> Język projektu [en]: pl
+
+

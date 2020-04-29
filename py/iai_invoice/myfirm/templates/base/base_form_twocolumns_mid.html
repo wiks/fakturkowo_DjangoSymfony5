@@ -1,0 +1,54 @@
+{# 'base/base_form_twocolumns_mid.html' #}
+
+{% extends "base/base_nonav.html" %}
+
+{% comment %}
+    forma z dwoma kolumnami
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_nav_main_div %}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm">
+
+                {% block base_form_main_upper_div %}{% endblock %}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+
+                {% block base_form_main_left_div %}{% endblock %}
+
+            </div>
+            <div class="col-sm">
+
+                {% block base_form_main_right_div %}{% endblock %}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+
+                {% block base_form_main_lower_div %}{% endblock %}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+
+                {% block base_form_main_lower_buttons %}{% endblock %}
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{# 'invoices/invoice_edit_add_item.html' #}
+
+{% extends 'invoices/invoice_edit_common_pure.html' %}
+
+{% comment %}
+    edycja faktury, wybieranie przedmiotu do dodania
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_left_part_for_item_select %}
+
+    {# ------------------------------------ usługi/towary ------------------------------------- #}
+
+    <div class="alert alert-info" role="alert">
+        Dodawanie wybranego towaru do faktury:<br>
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        <h3><span class="badge badge-light">{{ item.name }}</span></h3>
+        cena netto: {{ item.price_netto }} PLN, za 1 {{ item.jm.name }} [VAT: {{ item.vat.percent }}% ]
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        podaj ile {{ item.jm.name }}:<br>
+        <input type="text"
+               id="item_amount"
+               name="item_amount"
+               class="form-control"
+               aria-describedby="inputGroup-sizing-sm">
+    </div>
+
+{% endblock %}
+
+{% block base_form_main_lower_buttons %}
+
+    <button type="submit" name="action" value="OK" class="btn btn-primary btn">Zapisz</button>
+    <button type="submit" name="action" value="Cancel" class="btn btn-secondary btn">Wyjdź</button>
+
+{% endblock %}

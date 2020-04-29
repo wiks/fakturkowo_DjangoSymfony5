@@ -1,0 +1,33 @@
+{# 'base/base_basic_sote.html' #}
+
+{% load i18n static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>{% block title %}IAI-invoice{% endblock %}</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Language" content="pl-pl">
+        <meta name="description" content="IAI-invoice">
+        <meta name="author" content="WikS.eu">
+
+        <meta name="Copyright" content="Copyright © 2020 WikS.eu">
+        <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% include 'base/head_favicon.html' %}
+
+        {# include 'base/head_fb_twitter.html' #}
+        {# include 'base/head_analytics.html' #}
+
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+        {% block base_head_rest %}{% endblock %}
+
+    </head>
+    <body>
+        {% block base_body_rest %}{% endblock %}
+    </body>
+</html>

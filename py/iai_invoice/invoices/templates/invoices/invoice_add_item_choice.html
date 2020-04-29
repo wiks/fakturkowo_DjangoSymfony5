@@ -1,0 +1,102 @@
+{# 'invoices/invoice_add_item_choice.html' #}
+
+{% extends 'invoices/invoice_edit_common_pure.html' %}
+
+{% comment %}
+    edycja faktury, wybieranie przedmiotu do dodania
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_left_part_for_item_select %}
+
+    {# ------------------------------------ usługi/towary ------------------------------------- #}
+
+    <div ng-app="myApp" ng-controller="custCtrl">
+        <div class="container">
+
+            <div class="row">
+                <div class="col">
+
+                    <div class="alert alert-info" role="alert">
+                        Dodaj pozycję do faktury, rozpocznij wpisywanie nazwy:<br>
+                        Aby zobaczyć wszystkie towary, kliknij <a href="{% url 'items_list' %}" target="_blank">tutaj</a> ( otworzy się osobne okno ).
+                    </div>
+
+                    <div class="input-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing">nazwa towaru:</span>
+                        </div>
+                        <input type="text"
+                               id="lookfor"
+                               class="form-control"
+                               aria-describedby="inputGroup-sizing-sm"
+                               ng-model="lookfor"
+                               ng-change="myFunc()"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            {% verbatim %}
+                <div ng-if="item_simc_list.length>0 && item_simc_list.length< 10">
+            {% endverbatim %}
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="item_simc in item_simc_list">
+
+                            <a href="{% url 'invoice_add_item_choice' invoice.id %}{% verbatim %}{{ item_simc[0] }}/">
+                                <h3><span class="badge badge-info">{{ item_simc[1] }}</span></h3>
+                            </a>{% endverbatim %}
+                        </li>
+                    </ul>
+                </div>
+        </div> <!-- container -->
+    </div> <!-- AngularJS -->
+    <br>
+
+    <script type="text/javascript">
+        var angular_url = '{{ base_url }}{% url 'angular_url' %}';
+    </script>
+
+    <script src="{{ base_url }}{% static 'js/mangular_item.js' %}" type="text/javascript"></script>
+
+
+    {# --------------------------------------------------------------------------------- #}
+    {% if invoices_items_richer %}
+
+        <table class="table">
+
+            {% for invoice_item in invoices_items_richer %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td style="width:30%" colspan="3"><h4><span class="badge badge-dark">{{ invoice_item.name }}</span></h4></td>
+                    <td>
+                        <a href="{% url 'invoice_del_item' invoice.id invoice_item.id invoice_item.iid %}">
+                            <ion-icon ios="ios-trash" md="md-trash" style="font-size: 32px;"></ion-icon>
+                        </a>
+                    </td>
+                    <td style="text-align:right;">{{ invoice_item.items_number }} {{ invoice_item.jm }}</td>
+                </tr>
+
+            {% endfor %}
+
+        </table>
+
+        <br><br><br>
+
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            faktura nie zawiera żadnych pozycji
+        </div>
+    {% endif %}
+    {# --------------------------------------------------------------------------------- #}
+
+
+{% endblock %}
+
+{% block base_form_main_lower_buttons %}
+
+    <button type="submit" name="action" value="Cancel" class="btn btn-secondary btn">Wyjdź</button>
+
+{% endblock %}
+

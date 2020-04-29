@@ -1,0 +1,49 @@
+/* 
+    Created on : 2020-04-23, 09:43:51
+    Author     : wiks
+*/
+body {
+    background-color: ghostwhite;
+    /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 15px;
+}
+
+span.monospace {
+    font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+}
+
+/* błędy w formularzach */
+.error {
+    color: red;
+}
+
+
+/* ------------------------------ */
+
+.table_w100 {
+    width:100%;
+}
+
+.tr_border_center > td {
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.td_left {
+    text-align: left;
+}
+.td_right {
+    text-align: right;
+}
+.td_border {
+    border-style: solid;
+    border-width: 1px;
+}
+.td_border_center {
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+}
+

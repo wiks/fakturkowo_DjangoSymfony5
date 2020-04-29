@@ -1,0 +1,63 @@
+{# 'items/items_list.html' #}
+
+{% extends "base/base_nonav.html" %}
+
+{% comment %}
+    lista towarów
+{% endcomment %}
+
+{% load i18n static %}
+
+{% load proper_paginate %}
+
+{% block base_nav_main_div %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="alert alert-info" role="alert">
+            Towary
+        </div>
+
+        {% if items_list %}
+            <table class="table">
+                <tr>
+                    <th>nazwa</th>
+                    <th>cena netto</th>
+                    <th>jm</th>
+                    <th>vat</th>
+                </tr>
+                {% for item_one in items_list %}
+                    <tr>
+                        <td style="width:55%">{{ item_one.name }}</td>
+                        <td style="width:20%">{{ item_one.price_netto }} PLN</td>
+                        <td style="width:10%">{{ item_one.jm.name }}</td>
+                        <td>{{ item_one.vat.percent }} %</td>
+                    </tr>
+                {% endfor %}
+
+                {#<!-- sprawdzam czy jest paginator -->#}
+                {% if paginator %}
+                    <tr>
+                        <td colspan="4">
+                            {% with corected_pagination as page_obj %}
+                                {% include "base/pagination_buttons.html" %}
+                            {% endwith %}
+                        </td>
+                    </tr>
+                {% endif %}
+
+            </table>
+
+
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                towarów brak - przyjęcie towaru proponuje
+            </div>
+        {% endif %}
+
+
+        <button type="submit" name="action" value="Cancel" class="btn btn-secondary btn">Wyjdź</button>
+    </form>
+
+{% endblock %}

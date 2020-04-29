@@ -1,0 +1,9 @@
+# -*- coding: utf8 -*-
+
+[23/Apr/2020 06:47:17] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+[23/Apr/2020 06:47:17] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+[23/Apr/2020 06:47:17] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+
+no to mam chyba działa
+
+

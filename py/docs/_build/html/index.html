@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to IAI-invoice’s documentation! &#8212; IAI-invoice  - dokumentacja</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="Indeks" href="genindex.html" />
+    <link rel="search" title="Szukaj" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-iai-invoice-s-documentation">
+<h1>Welcome to IAI-invoice’s documentation!<a class="headerlink" href="#welcome-to-iai-invoice-s-documentation" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>Zajawka dokumentacji do zadania IAI / IdoSell.</p>
+<p>Treść zadania:</p>
+<p>w związku z tym prosimy o przygotowanie i przesłanie do środy, 29.04.2020 do godziny 12:30 następującego materiału:
+Celem zadania jest napisanie skryptu PHP do wystawiania faktur. Minimalna funkcjonalność:</p>
+<ul class="simple">
+<li><p>wystawienie dokumentu dla klienta (dane podane w inputach z klawiatury)</p></li>
+<li><p>przypisanie pozycji do faktury</p></li>
+<li><p>nadanie numeru, daty,</p></li>
+<li><p>lista wystawionych faktur</p></li>
+<li><p>usuwanie faktur</p></li>
+</ul>
+<p>Do powyższej funkcjonalności można dopisać szereg usprawnień, wykorzystać dowolny framework. Każdy dodatkowy element jest atutem podczas oceny. Realizacja minimalnej funkcjonalności jest akceptowalna. Proszę pamiętać, że czytelność kodu także podlega ocenie.
+Jeśli z jakichś powodów nie chciałby Pan lub nie mógł przystąpić do wykonania zadania, bardzo prosimy o przesłanie informacji zwrotnej o takiej decyzji</p>
+<p>Zadanie zrealizowałem w Symfony (jako DEBUG zamieszczam) oraz w Django (też jako DEBUG zamieszczam).</p>
+<p>Oba pracują na tej samej bazie danych, więc można cokolwiek robić w jednym i drugim, struktury są w zasadzie identyczne.</p>
+<p>fragment Unit-testów PHP:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>wiks@ubuntu:~/Dokumenty/projects/iai_task/php/iai_invoice$ php bin/phpunit
+PHPUnit 7.5.20 by Sebastian Bergmann and contributors.
+
+Testing Project Test Suite
+.......                                                             7 / 7 (100%)
+
+Time: 46 ms, Memory: 6.00 MB
+
+OK (7 tests, 1022 assertions)
+</pre></div>
+</div>
+<p>struktuta URL (identyczna jak w Django):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>wiks@ubuntu:~/Dokumenty/projects/iai_task/php/iai_invoice$ php bin/console debug:router
+ -------------------------- -------- -------- ------ ------------------------------------
+  Name                       Method   Scheme   Host   Path
+ -------------------------- -------- -------- ------ ------------------------------------
+  angular_url                ANY      ANY      ANY    /c/an
+  customers_main             ANY      ANY      ANY    /c
+  customer_show              ANY      ANY      ANY    /c/s/{customer_id}
+  customer_add_edit          ANY      ANY      ANY    /c/e/{customer_id}
+  invoices_main              ANY      ANY      ANY    /i
+  invoices_list              ANY      ANY      ANY    /i/l
+  invoice_add                ANY      ANY      ANY    /i/a/{customer_id}
+  invoice_show               ANY      ANY      ANY    /i/s/{invoice_id}
+  invoice_edit               ANY      ANY      ANY    /i/e/{invoice_id}
+  invoice_add_item_choice    ANY      ANY      ANY    /i/ai/{invoice_id}
+  invoice_add_item           ANY      ANY      ANY    /i/ai/{invoice_id}/{item_id}
+  invoice_del_item           ANY      ANY      ANY    /i/di/{invoice_id}/{item_id}/{iid}
+  invoice_delete             ANY      ANY      ANY    /i/d/{invoice_id}
+  items_list                 ANY      ANY      ANY    /t
+  index                      ANY      ANY      ANY    /
+  myfirm_main                ANY      ANY      ANY    /m
+  myfirm_edit                ANY      ANY      ANY    /m/e
+ -------------------------- -------- -------- ------ ------------------------------------
+
+wiks@ubuntu:~/Dokumenty/projects/iai_task/php/iai_invoice$
+</pre></div>
+</div>
+<p>(kurcze, nie zdążę tutaj zbyt wiele napisać, w każdym razie Sphinx`a też mam opanowanego,
+przykład dokumentacji wykonanj w nim: <a class="reference external" href="http://aboutloadcounter.qrgo.pl/">http://aboutloadcounter.qrgo.pl/</a> )</p>
+<p>Co można dodać na tą chwilę (niestety brakło mi czasu):</p>
+<p>// todo drukuj do PDF</p>
+<p>// todo dodawanie i edycja towarów</p>
+<p>// todo klasa z rodzajem jednostek sztuki/kg etc</p>
+<p>// todo edycja klasy VAT</p>
+<p>// todo DigitValues2words dla innych języków</p>
+<p>// todo - dopracuj inne formy przelewu wg ID</p>
+<p>// todo testy Selenium (brakło mi czasu)</p>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Indeks</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Indeks modułów</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Wyszukiwanie</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">IAI-invoice</a></h1>
+
+
+
+
+
+
+
+
+<h3>Nawigacja</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Szybkie wyszukiwanie</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Szukaj" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, WikS.eu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,60 @@
+{# 'base/alert_modal.html' #}
+
+{% extends "base/base_basic_libs.html" %}
+
+{% load i18n static %}
+
+{#<!-- aby dodać coś do stylu -->#}
+{% block base_basic_style %}
+    {% block base_nav_style %}{% endblock %}
+{% endblock %}
+
+{#<!-- aby dodać coś do skryptów w nagłówku -->#}
+{% block base_basic_head_scripts %}
+    {% block base_nav_head_scripts %}{% endblock %}
+{% endblock %}
+
+{#<!-- aby wytworzyć główną część -->#}
+{% block base_basic_main %}
+    <div class="content container pagination-centered">
+        <div class="row vertical-align" style="min-height:20px;">
+
+            {% if not breadcrumbs %}
+            {% else %}
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        {% for breadcrumb in breadcrumbs %}
+                            {% if not forloop.last %}
+                                <li class="breadcrumb-item"><a href="{% url breadcrumb.url %}">{{ breadcrumb.name }}</a></li>
+                            {% else %}
+                                <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.name }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ol>
+                </nav>
+            {% endif %}
+        </div>
+        <div class="vertical-align">
+
+            {% if errors_message_list %}
+                {% include 'base/alert_modal.html' %}
+                <script>
+                    $('#myModal').modal('show')
+                </script>
+            {% endif %}
+
+            <form action="" method="post">
+                {% csrf_token %}
+
+                {% block base_nav_main_div %}{% endblock %}
+
+            </form>
+
+        </div>
+    </div>
+    <br>
+{% endblock %}
+
+{% block base_basic_footer_scripts %}
+    {% block base_nav_footer_scripts %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,75 @@
+{# 'invoices/invoices_list.html' #}
+
+{% extends "base/base_nonav.html" %}
+
+{% comment %}
+    lista faktur
+{% endcomment %}
+
+{% load i18n static %}
+
+{% load proper_paginate %}
+
+{% block base_nav_main_div %}
+
+    <div class="alert alert-info" role="alert">
+        Faktury
+    </div>
+
+    {% if invoices_objs %}
+        <table class="table" style="width:100%;border-style: solid;border-width: 1px;">
+            <tr>
+                <th style="width:25%">nr</th>
+                <th>nabywca</th>
+                <th>kwota netto</th>
+                <th>utworzona</th>
+                <th>term.dostarczenia</th>
+            </tr>
+            {% for invoice_obj in corected_pagination %}
+                <tr>
+                    <td>
+                        <h4>
+                            <a href="{% url 'invoice_show' invoice_obj.id %}">
+                                {% if invoice_obj.nr %}
+                                    <span class="badge badge-dark">{{ invoice_obj.nr }}</span>
+                                {% else %}
+                                    <span class="badge badge-danger">faktura bez numeru</span>
+                                {% endif %}
+                            </a>
+                        </h4>
+                    </td>
+                    <td>
+                        {{ invoice_obj.customer.fname }}
+                    </td>
+                    <td>
+                        {{ invoice_obj.price_sum_netto }} PLN
+                    </td>
+                    <td>
+                        {{ invoice_obj.dt_created|date:'Y-m-d' }}
+                    </td>
+                    <td>
+                        {{ invoice_obj.dt_delivery|date:'Y-m-d' }}
+                    </td>
+
+                </tr>
+            {% endfor %}
+       </table>
+
+        {#<!-- sprawdzam czy jest paginator -->#}
+        {% if paginator %}
+            {% with corected_pagination as page_obj %}
+                {% include "base/pagination_buttons.html" %}
+            {% endwith %}
+        {% endif %}
+
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            lista jest pusta, dodaj pierwszą fakturę
+        </div>
+    {% endif %}
+    <a class="btn btn-primary" href="{% url 'invoice_add' %}" role="button">dodaj fakturę</a>
+    <br><br>
+
+    <button type="submit" name="action" value="Cancel" class="btn btn-secondary btn">Wyjdź</button>
+
+{% endblock %}

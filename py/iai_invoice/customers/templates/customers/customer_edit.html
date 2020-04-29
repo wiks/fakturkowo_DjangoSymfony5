@@ -1,0 +1,15 @@
+{# 'customers/customer_edit.html' #}
+
+{% extends "customers/firm_edit.html" %}
+
+{% comment %}
+    edycja danych klienta
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_form_main_head_div %}
+    <div class="alert alert-info" role="alert">
+        Edycja danych klienta
+    </div>
+{% endblock %}

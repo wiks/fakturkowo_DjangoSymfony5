@@ -1,0 +1,48 @@
+{# 'index.html' #}
+
+{% extends "base/base_nonav.html" %}
+
+{% comment %}
+    główna z opisem zadania
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_nav_main_div %}
+
+    <div class="alert alert-info" role="alert">
+        W związku z tym prosimy o przygotowanie i przesłanie do środy, 29.04.2020 do godziny 12:30 następującego materiału:
+    </div>
+
+
+    <div class="list-group">
+        <a href="{% url 'invoices_main' %}" class="list-group-item list-group-item-action active">
+            Celem zadania jest napisanie skryptu PHP do wystawiania faktur. Minimalna funkcjonalność:
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            wystawienie dokumentu dla klienta (dane podane w inputach z klawiatury)
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            przypisanie pozycji do faktury
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            nadanie numeru, daty,
+        </a>
+        <a href="{% url 'invoices_list' %}" class="list-group-item list-group-item-action">
+            lista wystawionych faktur
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            usuwanie faktur
+        </a>
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        Do powyższej funkcjonalności można dopisać szereg usprawnień, wykorzystać dowolny framework. Każdy dodatkowy element jest atutem podczas oceny. Realizacja minimalnej funkcjonalności jest akceptowalna. Proszę pamiętać, że czytelność kodu także podlega ocenie.<br>
+    </div>
+
+    <div class="alert alert-warning" role="alert">
+        Jeśli z jakichś powodów nie chciałby Pan lub nie mógł przystąpić do wykonania zadania, bardzo prosimy o przesłanie informacji zwrotnej o takiej decyzji
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,19 @@
+{# 'invoices/invoice_show.html' #}
+
+{% extends "invoices/invoice_show_common.html" %}
+
+{% comment %}
+    podgląd danych faktury
+{% endcomment %}
+
+{% load i18n static %}
+
+
+{% block base_form_main_lower_buttons %}
+
+    <button type="submit" name="action" value="OK" class="btn btn-primary btn">Drukuj</button>
+    <button type="submit" name="action" value="edit" class="btn btn-warning btn">Edytuj</button>
+    <button type="submit" name="action" value="delete" class="btn btn-danger btn">Usuń</button>
+    <button type="submit" name="action" value="Cancel" class="btn btn-secondary btn">Wyjdź</button>
+
+{% endblock %}

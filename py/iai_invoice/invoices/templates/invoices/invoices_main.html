@@ -1,0 +1,64 @@
+{# 'invoices/invoices_main.html' #}
+
+{% extends "base/base_nonav.html" %}
+
+{% comment %}
+    główna rozwiązania,
+    tutaj odgałęzienia do:
+    -edycji swoich danych,
+    -tworzenia odbiorców,
+    -listowania faktur,
+    -tworzenia faktury,
+    -usuwania faktur,
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_nav_main_div %}
+
+    <div class="alert alert-info" role="alert">
+        Home
+    </div>
+
+    <div class="list-group">
+        <a href="{% url 'invoices_list' %}" class="list-group-item list-group-item-action">
+            faktury
+        </a>
+        <a href="{% url 'items_list' %}" class="list-group-item list-group-item-action">
+            towary
+        </a>
+        <a href="{% url 'customers_main' %}" class="list-group-item list-group-item-action">
+            klienci
+        </a>
+        <a href="{% url 'myfirm_main' %}" class="list-group-item list-group-item-action">
+            dane własne
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            linki do rozwiązania na GIT
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            linki do dokumentacji etc
+        </a>
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        Opierałem się na wiedzy księgowej :-) <a href="https://pl.wikipedia.org/wiki/Faktura_(dokument)" target="_blank">stąd</a>.<br>
+        Przykładowa faktura <a href="https://www.rapex.net.pl/public/assets/przyk%C5%82adowa%20faktura.png" target="_blank">przykładowa faktura</a>.
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        Użyłem:<br>
+        <ul>
+            <li>Python3/Django3 - prototyp</li>
+            <li>MySQL</li>
+            <li>PHP7/Symfony5</li>
+            <li>Bootstrap4, jQuery, AngularJS</li>
+            <li>NetBeans</li>
+            <li>PyCharm</li>
+        </ul>
+        Wersja zadaniowa, bez logowania i ze sporą ilością komentarzy.<br>
+        Użyto utworzone konto Gmail do wysyłania maili, zasymulowano Rabbit do tworzenia PDF (faktycznie nie użyłem tutaj mech. asynchronicznych).
+    </div>
+
+{% endblock %}
+

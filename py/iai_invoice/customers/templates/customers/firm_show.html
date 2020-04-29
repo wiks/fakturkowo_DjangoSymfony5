@@ -1,0 +1,115 @@
+{# 'customers/firm_show.html' #}
+
+{% extends "base/base_nonav.html" %}
+
+{% comment %}
+    edycja danych własnych lub firmy klienta
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_nav_main_div %}
+
+    {% block base_form_main_head_div %}{% endblock %}
+
+    {% if firm_data_obj %}
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm">
+                    <h1>
+                        <span class="badge badge-dark">{{ firmName }}</span>
+                    </h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm">
+
+                    <div class="form-group">
+                        <label for="firmAdres1">adres</label>
+                        <input type="text" class="form-control firmAdres" id="firmAdres1" name="firmAdres1" value="{{ firmAdres1 }}"
+                               aria-describedby="firmAdres1Help" disabled>
+                        {% if firmAdres2 %}
+                            <input type="text" class="form-control firmAdres" id="firmAdres2" name="firmAdres2" value="{{ firmAdres2 }}"
+                                   aria-describedby="firmAdres1Help" disabled>
+                        {% endif %}
+                        {% if firmAdres3 %}
+                            <input type="text" class="form-control firmAdres" id="firmAdres3" name="firmAdres3" value="{{ firmAdres3 }}"
+                                   aria-describedby="firmAdres1Help" disabled>
+                        {% endif %}
+                        {% if firmAdres4 %}
+                            <input type="text" class="form-control firmAdres" id="firmAdres4" name="firmAdres4" value="{{ firmAdres4 }}"
+                                   aria-describedby="firmAdres1Help" disabled>
+                        {% endif %}
+                        {% if firmAdres5 %}
+                            <input type="text" class="form-control firmAdres" id="firmAdres5" name="firmAdres5" value="{{ firmAdres5 }}"
+                                   aria-describedby="firmAdres1Help" disabled>
+                        {% endif %}
+                    </div>
+
+                    {% if mInputEmail %}
+                        <div class="form-group">
+                            <label for="mInputEmail">email</label>
+                            <input type="email" class="form-control mInputEmail" id="mInputEmail" name="mInputEmail" value="{{ mInputEmail }}"
+                                   aria-describedby="emailHelp" disabled>
+                        </div>
+                    {% endif %}
+
+                </div>
+                <div class="col-sm">
+
+                    {% if firmNip %}
+                        <div class="form-group">
+                            <label for="firmNip">NIP</label>
+                            <input type="text" class="form-control firmNip" id="firmNip" name="firmNip" value="{{ firmNip }}"
+                                   aria-describedby="firmNipHelp" disabled>
+                        </div>
+                    {% endif %}
+
+                    {% if firmRegon %}
+                        <div class="form-group">
+                            <label for="firmRegon">REGON</label>
+                            <input type="text" class="form-control firmRegon" id="firmRegon" name="firmRegon" value="{{ firmRegon }}"
+                                   aria-describedby="firmNipHelp" disabled>
+                        </div>
+                    {% endif %}
+
+                    {% if firmPesel %}
+                        <div class="form-group">
+                            <label for="firmPesel">PESEL</label>
+                            <input type="text" class="form-control firmPesel" id="firmPesel" name="firmPesel" value="{{ firmPesel }}"
+                                   aria-describedby="firmNipHelp" disabled>
+                        </div>
+                    {% endif %}
+
+
+                    <div class="form-group">
+                        <label for="firmAccount1">bank, numer konta</label>
+                        <input type="text" class="form-control firmAccount" id="firmAccount1" name="firmAccount1" value="{{ firmAccount1 }}"
+                               aria-describedby="firmAccount1Help" disabled>
+
+                        {% if firmAccount2 %}
+                            <input type="text" class="form-control firmAccount" id="firmAccount2" name="firmAccount2" value="{{ firmAccount2 }}"
+                                   aria-describedby="firmAccount2Help" disabled>
+                        {% endif %}
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <button type="submit" name="action" value="create_edit" class="btn btn-primary btn">edytuj</button>
+
+    {% else %}
+
+        <button type="submit" name="action" value="create_edit" class="btn btn-primary btn">utwórz</button>
+
+    {% endif %}
+
+    <button type="submit" name="action" value="Cancel" class="btn btn-secondary btn">Wyjdź</button>
+
+{% endblock %}

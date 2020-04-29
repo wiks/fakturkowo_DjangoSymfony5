@@ -1,0 +1,207 @@
+wiks@ubuntu:~/Pulpit/iai_task/php$ symfony new iai_invoice --full
+* Creating a new Symfony project with Composer
+  (running /usr/bin/composer create-project symfony/website-skeleton /home/wiks/Pulpit/iai_task/php/iai_invoice)
+
+* Setting up the project under Git version control
+  (running git init /home/wiks/Pulpit/iai_task/php/iai_invoice)
+
+                                                                                
+ [OK] Your project is now ready in /home/wiks/Pulpit/iai_task/php/iai_invoice   
+                                                                                
+
+wiks@ubuntu:~/Pulpit/iai_task/php$ 
+
+========================================================= od nowa
+
+
+wiks@ubuntu:~/Pulpit/iai_task/php$ composer create-project symfony/website-skeleton iai_invoice
+Installing symfony/website-skeleton (v5.0.99)
+
+ What's next? 
+              
+
+  * You're ready to send emails.
+
+  * If you want to send emails via a supported email provider, install
+    the corresponding bridge.
+    For instance, composer require mailgun-mailer for Mailgun.
+
+  * If you want to send emails asynchronously:
+
+    1. Install the messenger component by running composer require messenger;
+    2. Add 'Symfony\Component\Mailer\Messenger\SendEmailMessage': amqp to the
+       config/packages/messenger.yaml file under framework.messenger.routing
+       and replace amqp with your transport name of choice.
+
+  * Read the documentation at https://symfony.com/doc/master/mailer.html
+
+                        
+ Database Configuration 
+                        
+
+  * Modify your DATABASE_URL config in .env
+
+  * Configure the driver (mysql) and
+    server_version (5.7) in config/packages/doctrine.yaml
+
+              
+ How to test? 
+              
+
+  * Write test cases in the tests/ folder
+  * Run php bin/phpunit
+
+wiks@ubuntu:~/Pulpit/iai_task/php$
+
+------------------------
+wiks@ubuntu:~/Pulpit/iai_task/php$ ls
+iai_invoice  notki_install.txt
+wiks@ubuntu:~/Pulpit/iai_task/php/iai_invoice$ symfony server:start
+
+Version 4.14.3 is available. Do you want to update now (execution will continue after whatever you decide) ? [Y/n]: n
+OK, I'll ask you again tomorrow.
+You can upgrade manually at any time using the `self:update` command
+
+                                                                                
+ [WARNING] run "symfony server:ca:install" first if you want to run the web     
+ server with TLS support, or use "--no-tls" to avoid this warning               
+                                                                                
+
+Apr 26 09:19:38 |DEBUG| PHP    Reloading PHP versions 
+Apr 26 09:19:38 |DEBUG| PHP    Using PHP version 7.2.24 (from default version in $PATH) 
+Apr 26 09:19:38 |INFO | PHP    listening path="/usr/bin/php7.2" php="7.2.24" port=44303
+Apr 26 09:19:38 |DEBUG| PHP    started 
+                                                                                
+ [OK] Web server listening on                                                   
+ http://127.0.0.1:8000 (PHP CLI 7.2.24)                                         
+                                                                                
+
+WARNING unable to find the application log
+Apr 26 09:19:42 |WARN | SERVER GET  (404) / ip="127.0.0.1"
+Apr 26 09:19:42 |INFO | SERVER GET  (200) /_wdt/067015 
+
+composer require logger
+composer require annotations
+composer require twig
+composer require symfony/asset
+
+php bin/console debug:router
+----------------
+https://symfony.com/doc/current/page_creation.html
+https://symfony.com/doc/current/templates.html
+https://symfony.com/doc/current/logging.html
+----------------
+
+{# ... #}
+{{ include('blog/_user_profile.html.twig') }}
+
+{% comment %} - nie tak, trzeba nawet wielolinijkowe {# #}
+https://www.branchcms.com/learn/docs/developer/twig/comments
+
+{% extends "base/base_form_twocolumns_mid.html.twig" %} - chyba tak samo
+{% block base_form_main_lower_buttons %} - chyba tak samo
+
+https://symfony.com/doc/current/templating/twig_extension.html
+{% load i18n static %} - ???????
+{% load proper_paginate %}
+{% load url_replace %}
+
+https://www.branchcms.com/learn/docs/developer/twig
+
+php bin/console debug:twig
+
+zamiast:
+src="{% static 'img/favicon/favicon-16x16.png' %}
+ma być:
+<img src="{{ asset('images/logo.png') }}" 
+
+zamiast:
+<a href="{% url 'invoices_main' %}"
+mabyć:
+<a href="{{ path('blog_index') }}"   gdzie * @Route("/article/{slug}", name="blog_post")
+lub
+<a href="{{ path('blog_post', {slug: post.slug}) }}">{{ post.title }}</a>
+
+no i trzeba też przy zmiennych TWIG niezdefiniowanych użyć:
+{% if errors_message_list|default %}
+
+forloop
+https://twig.symfony.com/doc/3.x/tags/for.html
+loop  loop.index
+
+
+https://symfony.com/doc/current/doctrine.html
+composer require symfony/orm-pack
+composer require --dev symfony/maker-bundle
+
+
+https://symfony.com/doc/current/doctrine.html#relationships-and-associations
+https://symfony.com/doc/current/doctrine/associations.html
+
+https://symfony.com/doc/current/doctrine/reverse_engineering.html
+php bin/console doctrine:mapping:import "App\Entity" annotation --path=src/Entity
+php bin/console make:entity --regenerate App
+
+
+DB:
+https://symfony.com/doc/current/doctrine.html#fetching-objects-from-the-database
+
+
+{% csrf_token %}
+<input type="hidden" name="token" value="{{ csrf_token('itemslist') }}"/>
+https://symfony.com/doc/current/security/csrf.html
+composer require symfony/security-csrf
+
+
+
+pagination
+http://geekster.pl/symfony/knppaginatorbundle/  <=== !
+
+opcje:
+config/packages/knp_paginator.yaml --> choćby wybór template
+ template:
+vendor/knplabs/knp-paginator-bundle/templates/Pagination
+/sliding.html.twig <== zmiany nazw klas css
+dla spanów zmiana klas na:
+btn btn-outline-info mb-4 active
+
+
+DB:
+
+item_one.jm.name
+
+
+{% endverbatim %}  -- https://stackoverflow.com/questions/23071566/verbatim-tag-inside-if-statement
+- zdaje się tak samo...
+
+{{ base_url }} -- spróbuję ominąć, używając:
+
+<script src="{{ absolute_url(asset('js/mangular_customer.js')) }}" type="text/javascript"></script>
+
+lub
+{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/acmedemo/images/search.png') }}
+
+
+item_simc[0]
+item_simc_list
+{# url 'angular_url' #}
+{% static 'js/mangular_customer.js'
+
+
+return new JsonResponse(array('name' => $name));
+https://developer.okta.com/blog/2018/08/14/php-crud-app-symfony-angular
+
+
+
+
+php bin/phpunit
+
+
+{% with
+{% with {shortfirm: shortfirm_seller} %}
+
+
+
+
+
+

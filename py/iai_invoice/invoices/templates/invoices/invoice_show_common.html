@@ -1,0 +1,161 @@
+{# 'invoices/invoice_show_common.html' #}
+
+{% extends "base/base_form_twocolumns_mid.html" %}
+
+{% comment %}
+    podgląd danych faktury
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_basic_style %}{% endblock %}
+
+
+{% block base_form_main_upper_div %}
+
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 60%;">
+
+                Sprzedawca:
+                {% with shortfirm_seller as shortfirm %}
+                    {% include 'customers/firm_show_mini.html' %}
+                {% endwith %}
+
+            </td>
+            <td style="text-align: right;">
+
+                <h2>Faktura nr: {{ fNr }}</h2>
+
+                z dnia: {{ dt_created }}<br>
+
+                {% if dt_delivery %}
+                    data dostarczenia usługi: {{ dt_delivery }}<br>
+                {% endif %}
+
+            </td>
+        </tr>
+    </table>
+
+
+    <br><br><br>
+    Nabywca:
+    {% with shortfirm_customer as shortfirm %}
+        {% include 'customers/firm_show_mini.html' %}
+    {% endwith %}
+    <br><br><br>
+
+
+    <table class="table_w100">
+        <tr>
+            <td class="td_right">
+                Forma płatności: {{ paid_form }}
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                Termin płatności: {{ dt_pait_to }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="table_w100" style="border-style:solid;border-width:2px;">
+                    <tr class="tr_border_center">
+                        <td style="width:5%;">L.p.</td>
+                        <td style="width:45%;">Nazwa towaru / usługi</td>
+                        <td style="width:5%;">PKWiU</td>
+                        <td style="width:5%;">Ilość</td>
+                        <td style="width:5%;">J.m.</td>
+                        <td style="width:10%;">
+                            <table class="table_w100">
+                                <tr>
+                                    <td class="td_border_center">cena jedn. brutto
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td_border_center">cena jedn. netto</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:5%;">Wartość netto</td>
+                        <td style="width:5%;">VAT</td>
+                        <td style="width:5%;">Wartość brutto</td>
+                    </tr>
+
+                    {% for invoice_item in invoices_items_richer %}
+                        {% include 'invoices/invoice_show_common_one_row.html' %}
+                    {% endfor %}
+
+                </table>
+            </td>
+        </tr>
+        <tr style="height:20px">
+            <td class="td_right">
+
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                <table class="table_w100">
+                    <tr>
+                        <td style="width:50%;"></td>
+                        <td>
+                            {% include 'invoices/invoice_show_vat_sum_table.html' %}
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+        <tr>
+            <td class="td_left">
+                razem: {{ price_sum_brutto|floatformat:-2 }} PLN
+            </td>
+        </tr>
+        <tr>
+            <td class="td_left">
+                słownie: {{ price_sum_brutto_translated }} PLN
+            </td>
+        </tr>
+        <tr>
+            <td class="td_left">
+                zapłacono: {{ paid_sum_brutto|floatformat:-2 }} PLN
+            </td>
+        </tr>
+        <tr>
+            <td class="td_left">
+                pozostało do zapłaty: {{ price_sum_brutto|floatformat:-2 }} PLN
+            </td>
+        </tr>
+        <tr style="height:100px">
+            <td class="td_right">
+
+
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                <table class="table_w100">
+                    <tr>
+                        <td style="width:50%;text-align: center;">
+                            ...<br>
+                            podpis osoby upoważnionej do odbioru faktury:<br>
+                            ...<br>
+                        </td>
+                        <td style="text-align: center;">
+                            {{ person_auth_name }}<br>
+                            podpis osoby upoważnionej do wystawienia faktury:<br>
+                            ...<br>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr style="height:200px">
+            <td class="td_right">
+
+            </td>
+        </tr>
+    </table>
+
+{% endblock %}

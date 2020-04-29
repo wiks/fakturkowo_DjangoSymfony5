@@ -1,0 +1,31 @@
+{# 'invoces/invoice_show_common_one_row.html' #}
+
+{% comment %}
+    jeden wiersz faktury do pokazania
+{% endcomment %}
+
+
+<tr>
+    <td class="td_border_center">{{ forloop.counter }}</td>
+    <td class="td_border td_left">{{ invoice_item.name }}</td>
+    <td class="td_border_center">-</td>
+    <td class="td_border_center">{{ invoice_item.items_number }}</td>
+    <td class="td_border_center">{{ invoice_item.jm }}</td>
+    <td class="td_border_center">
+        <table class="table_w100">
+            <tr>
+                <td class="td_border td_right">
+                    {{ invoice_item.price_brutto|floatformat:-2 }}
+                </td>
+            </tr>
+            <tr>
+                <td class="td_border td_right">
+                    {{ invoice_item.price_netto|floatformat:-2 }}
+                </td>
+            </tr>
+        </table>
+    </td>
+    <td class="td_border_center">{{ invoice_item.value_netto|floatformat:-2 }}</td>
+    <td class="td_border_center">{{ invoice_item.vat }}%</td>
+    <td class="td_border_center">{{ invoice_item.value_brutto|floatformat:-2 }}</td>
+</tr>

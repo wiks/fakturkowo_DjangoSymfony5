@@ -1,0 +1,15 @@
+{# 'myfirm/myfirm_show.html' #}
+
+{% extends "customers/firm_show.html" %}
+
+{% comment %}
+    podgląd danych własnych
+{% endcomment %}
+
+{% load i18n static %}
+
+{% block base_form_main_head_div %}
+    <div class="alert alert-info" role="alert">
+        Dane własne (wystawiającego fakturę)
+    </div>
+{% endblock %}
